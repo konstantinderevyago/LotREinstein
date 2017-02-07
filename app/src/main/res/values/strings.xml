@@ -1,3 +1,113 @@
 <resources>
     <string name="app_name">LotREinstein</string>
+
+    <string name="condition_1">Первый мешок принадлежит Леголасу</string>
+    <string name="condition_2">У Гимли красный мешок</string>
+    <string name="condition_3">Зелёный мешок находится слева от белого</string>
+    <string name="condition_4">Арагорн пьёт джин</string>
+    <string name="condition_5">Мешок того, кто курит перик, лежит рядом с мешком с кинжалом</string>
+    <string name="condition_6">Владелец жёлтого не курит</string>
+    <string name="condition_7">Бильбо курит верджинию</string>
+    <string name="condition_8">Владелец центрального мешка пьёт эль</string>
+    <string name="condition_9">Сосед того, кто курит перик, пьёт вино</string>
+    <string name="condition_10">Тот, кто курит латанию - у него локон</string>
+    <string name="condition_11">У Гендальфа книга</string>
+    <string name="condition_12">Рядом с мешком Леголаса лежит синий мешок</string>
+    <string name="condition_13">Подвеска в синем мешке</string>
+    <string name="condition_14">Тот, кто курит мэриленд, пьёт коньяк</string>
+    <string name="condition_15">Владелец зелёного мешка пьёт вино</string>
+
+    <string name="empty" />
+    <string name="task">Загадка</string>
+    <string name="conditions">Условия</string>
+    <string name="undo">Назад</string>
+    <string name="redo">Вперед</string>
+    <string name="restart">Заново</string>
+
+    <string name="number">№</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+
+    <string name="name">Имя</string>
+    <string name="gendalf">Гендальф</string>
+    <string name="aragorn">Арагорн</string>
+    <string name="legolas">Леголас</string>
+    <string name="gimly">Гимли</string>
+    <string name="bilbo">Бильбо</string>
+
+    <string name="color">Цвет</string>
+    <string name="red">Красный</string>
+    <string name="green">Зелёный</string>
+    <string name="blue">Синий</string>
+    <string name="yellow">Жёлтый</string>
+    <string name="white">Белый</string>
+
+    <string name="alcohol">Бухлишко</string>
+    <string name="beer">Пиво</string>
+    <string name="wine">Вино</string>
+    <string name="gin">Джин</string>
+    <string name="ale">Эль</string>
+    <string name="cognac">Коньяк</string>
+
+    <string name="smoke">Табак</string>
+    <string name="no">Нет</string>
+    <string name="latania">Латания</string>
+    <string name="peric">Перик</string>
+    <string name="maryland">Мэриленд</string>
+    <string name="verginia">Верджиния</string>
+
+    <string name="thing">Предмет</string>
+    <string name="book">Книга</string>
+    <string name="dagger">Кинжал</string>
+    <string name="curl">Локон</string>
+    <string name="suspension">Подвеска</string>
+    <string name="ring">Кольцо</string>
+
+    <string-array name="names">
+        <item>@string/empty</item>
+        <item>@string/gendalf</item>
+        <item>@string/aragorn</item>
+        <item>@string/legolas</item>
+        <item>@string/gimly</item>
+        <item>@string/bilbo</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>@string/empty</item>
+        <item>@string/red</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+        <item>@string/yellow</item>
+        <item>@string/white</item>
+    </string-array>
+
+    <string-array name="alcohols">
+        <item>@string/empty</item>
+        <item>@string/beer</item>
+        <item>@string/wine</item>
+        <item>@string/gin</item>
+        <item>@string/ale</item>
+        <item>@string/cognac</item>
+    </string-array>
+
+    <string-array name="smokes">
+        <item>@string/empty</item>
+        <item>@string/no</item>
+        <item>@string/latania</item>
+        <item>@string/peric</item>
+        <item>@string/maryland</item>
+        <item>@string/verginia</item>
+    </string-array>
+
+    <string-array name="things">
+        <item>@string/empty</item>
+        <item>@string/book</item>
+        <item>@string/dagger</item>
+        <item>@string/curl</item>
+        <item>@string/suspension</item>
+        <item>@string/ring</item>
+    </string-array>
 </resources>
