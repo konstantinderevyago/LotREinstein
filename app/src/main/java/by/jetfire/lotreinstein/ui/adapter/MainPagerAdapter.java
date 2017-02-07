@@ -1,8 +1,11 @@
-package by.jetfire.lotreinstein;
+package by.jetfire.lotreinstein.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import by.jetfire.lotreinstein.ui.fragment.ConditionsFragment;
+import by.jetfire.lotreinstein.ui.fragment.TaskFragment;
 
 /**
  * Created by Konstantin on 06.02.2017.

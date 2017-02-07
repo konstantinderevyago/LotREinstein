@@ -1,4 +1,4 @@
-package by.jetfire.lotreinstein;
+package by.jetfire.lotreinstein.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import by.jetfire.lotreinstein.ui.adapter.MainPagerAdapter;
+import by.jetfire.lotreinstein.R;
 
 public class MainActivity extends AppCompatActivity {
 

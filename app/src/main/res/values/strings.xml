@@ -15,7 +15,7 @@
     <string name="condition_12">Рядом с мешком Леголаса лежит синий мешок</string>
     <string name="condition_13">Подвеска в синем мешке</string>
     <string name="condition_14">Тот, кто курит мэриленд, пьёт коньяк</string>
-    <string name="condition_15">Владелец зелёного мешка пьёт вино</string>
+    <string name="condition_15">Владелец зелёного мешка пьёт пиво</string>
 
     <string name="empty" />
     <string name="task">Загадка</string>
@@ -64,7 +64,7 @@
     <string name="dagger">Кинжал</string>
     <string name="curl">Локон</string>
     <string name="suspension">Подвеска</string>
-    <string name="ring">Кольцо</string>
+    <string name="ring">Инфа о кольцо</string>
 
     <string-array name="names">
         <item>@string/empty</item>

@@ -1,4 +1,4 @@
-package by.jetfire.lotreinstein;
+package by.jetfire.lotreinstein.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,15 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import by.jetfire.lotreinstein.R;
+
 /**
  * Created by Konstantin on 06.02.2017.
  */
 
-public class TaskFragment extends Fragment {
+public class ConditionsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_task, container, false);
+        return inflater.inflate(R.layout.fragment_conditions, container, false);
     }
 }
