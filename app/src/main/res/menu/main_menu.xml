@@ -15,9 +15,15 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/conditions"
+        android:icon="@drawable/ic_list"
+        android:title="@string/conditions"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/restart"
         android:icon="@drawable/ic_restart"
         android:title="@string/restart"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 </menu>

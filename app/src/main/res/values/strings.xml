@@ -1,21 +1,22 @@
 <resources>
     <string name="app_name">LotREinstein</string>
+    <string name="title">Где инфа о кольце?</string>
 
-    <string name="condition_1">Первый мешок принадлежит Леголасу</string>
-    <string name="condition_2">У Гимли красный мешок</string>
-    <string name="condition_3">Зелёный мешок находится слева от белого</string>
-    <string name="condition_4">Арагорн пьёт джин</string>
-    <string name="condition_5">Мешок того, кто курит перик, лежит рядом с мешком с кинжалом</string>
-    <string name="condition_6">Владелец жёлтого не курит</string>
-    <string name="condition_7">Бильбо курит верджинию</string>
-    <string name="condition_8">Владелец центрального мешка пьёт эль</string>
-    <string name="condition_9">Сосед того, кто курит перик, пьёт вино</string>
-    <string name="condition_10">Тот, кто курит латанию - у него локон</string>
-    <string name="condition_11">У Гендальфа книга</string>
-    <string name="condition_12">Рядом с мешком Леголаса лежит синий мешок</string>
-    <string name="condition_13">Подвеска в синем мешке</string>
-    <string name="condition_14">Тот, кто курит мэриленд, пьёт коньяк</string>
-    <string name="condition_15">Владелец зелёного мешка пьёт пиво</string>
+    <string name="condition_1">1. Первый мешок принадлежит Леголасу</string>
+    <string name="condition_2">2. У Гимли красный мешок</string>
+    <string name="condition_3">3. Зелёный мешок находится слева от белого</string>
+    <string name="condition_4">4. Арагорн пьёт джин</string>
+    <string name="condition_5">5. Мешок того, кто курит перик, лежит рядом с мешком с кинжалом</string>
+    <string name="condition_6">6. Владелец жёлтого не курит</string>
+    <string name="condition_7">7. Бильбо курит верджинию</string>
+    <string name="condition_8">8. Владелец центрального мешка пьёт эль</string>
+    <string name="condition_9">9. Сосед того, кто курит перик, пьёт вино</string>
+    <string name="condition_10">10. Тот, кто курит латанию - у него локон</string>
+    <string name="condition_11">11. У Гендальфа книга</string>
+    <string name="condition_12">12. Рядом с мешком Леголаса лежит синий мешок</string>
+    <string name="condition_13">13. Подвеска в синем мешке</string>
+    <string name="condition_14">14. Тот, кто курит мэриленд, пьёт коньяк</string>
+    <string name="condition_15">15. Владелец зелёного мешка пьёт пиво</string>
 
     <string name="empty" />
     <string name="task">Загадка</string>
@@ -64,7 +65,7 @@
     <string name="dagger">Кинжал</string>
     <string name="curl">Локон</string>
     <string name="suspension">Подвеска</string>
-    <string name="ring">Инфа о кольцо</string>
+    <string name="ring">Инфа о кольце</string>
 
     <string-array name="names">
         <item>@string/empty</item>
@@ -110,4 +111,8 @@
         <item>@string/suspension</item>
         <item>@string/ring</item>
     </string-array>
+
+    <string name="restart_message">Начать заново?</string>
+    <string name="ok">Да</string>
+    <string name="cancel">Отмена</string>
 </resources>
