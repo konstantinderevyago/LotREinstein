@@ -7,13 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     protected LinearLayout container;
 
     private List<TaskItem> taskItems;
+    private Stack<List<TaskItem>> previousStack;
+    private Stack<List<TaskItem>> nextStack;
+    private List<TaskItem> currentTaskState;
+
+    private boolean menuClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         taskItems = Utils.getTaskItems(this);
+        nextStack = new Stack<>();
+        previousStack = new Stack<>();
+
         buildTable(container);
+        currentTaskState = getTaskState();
     }
 
     private void buildTable(ViewGroup view) {
@@ -84,7 +98,69 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(arrayRes));
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
+
+        final boolean[] create = {true};
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!create[0]) {
+                    if (!menuClicked) {
+                        nextStack.clear();
+                        previousStack.push(currentTaskState);
+                        currentTaskState = getTaskState();
+                    } else {
+                        menuClicked = false;
+                    }
+                } else {
+                    create[0] = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         view.addView(spinner);
+    }
+
+    private List<TaskItem> getTaskState() {
+        List<TaskItem> taskItems = new ArrayList<>();
+        for (int i = 1; i < container.getChildCount(); i++) {
+            LinearLayout linearLayout = (LinearLayout) container.getChildAt(i);
+            Spinner nameSpinner = (Spinner) linearLayout.getChildAt(1);
+            Spinner colorSpinner = (Spinner) linearLayout.getChildAt(2);
+            Spinner alcoholSpinner = (Spinner) linearLayout.getChildAt(3);
+            Spinner smokeSpinner = (Spinner) linearLayout.getChildAt(4);
+            Spinner thingSpinner = (Spinner) linearLayout.getChildAt(5);
+
+            taskItems.add(new TaskItem(i, (String) nameSpinner.getSelectedItem(),
+                    (String) colorSpinner.getSelectedItem(), (String) alcoholSpinner.getSelectedItem(),
+                    (String) smokeSpinner.getSelectedItem(), (String) thingSpinner.getSelectedItem()));
+        }
+        return taskItems;
+    }
+
+    private void setTaskState(List<TaskItem> taskItems) {
+        for (int i = 1; i < container.getChildCount(); i++) {
+            LinearLayout linearLayout = (LinearLayout) container.getChildAt(i);
+            Spinner nameSpinner = (Spinner) linearLayout.getChildAt(1);
+            Spinner colorSpinner = (Spinner) linearLayout.getChildAt(2);
+            Spinner alcoholSpinner = (Spinner) linearLayout.getChildAt(3);
+            Spinner smokeSpinner = (Spinner) linearLayout.getChildAt(4);
+            Spinner thingSpinner = (Spinner) linearLayout.getChildAt(5);
+
+            TaskItem taskItem = taskItems.get(i - 1);
+            nameSpinner.setSelection(getArrayPosition(R.array.names, taskItem.getName()));
+            colorSpinner.setSelection(getArrayPosition(R.array.colors, taskItem.getColor()));
+            alcoholSpinner.setSelection(getArrayPosition(R.array.alcohols, taskItem.getAlcohol()));
+            smokeSpinner.setSelection(getArrayPosition(R.array.smokes, taskItem.getSmoke()));
+            thingSpinner.setSelection(getArrayPosition(R.array.things, taskItem.getThing()));
+        }
+    }
+
+    private int getArrayPosition(int arrayRes, String item) {
+        return Arrays.asList(getResources().getStringArray(arrayRes)).indexOf(item);
     }
 
     @Override
@@ -114,11 +190,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void undo() {
+        if (previousStack.size() > 0) {
+            menuClicked = true;
 
+            nextStack.push(currentTaskState);
+            currentTaskState = previousStack.pop();
+            setTaskState(currentTaskState);
+        }
     }
 
     private void redo() {
+        if (nextStack.size() > 0) {
+            menuClicked = true;
 
+            previousStack.push(currentTaskState);
+            currentTaskState = nextStack.pop();
+            setTaskState(currentTaskState);
+        }
     }
 
     private void showConditionsDialog() {
@@ -152,10 +240,24 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        previousStack.clear();
+                        nextStack.clear();
+                        clearTable();
+                        currentTaskState = getTaskState();
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
+    }
+
+    private void clearTable() {
+        for (int i = 1; i < container.getChildCount(); i++) {
+            LinearLayout linearLayout = (LinearLayout) container.getChildAt(i);
+            ((Spinner) linearLayout.getChildAt(1)).setSelection(0);
+            ((Spinner) linearLayout.getChildAt(2)).setSelection(0);
+            ((Spinner) linearLayout.getChildAt(3)).setSelection(0);
+            ((Spinner) linearLayout.getChildAt(4)).setSelection(0);
+            ((Spinner) linearLayout.getChildAt(5)).setSelection(0);
+        }
     }
 }
