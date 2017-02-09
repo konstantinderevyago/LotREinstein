@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">LotREinstein</string>
-    <string name="title">Где инфа о кольце?</string>
+    <string name="app_name">Где информация о кольце?</string>
 
     <string name="condition_1">1. Первый мешок принадлежит Леголасу</string>
     <string name="condition_2">2. У Гимли красный мешок</string>
@@ -65,7 +64,7 @@
     <string name="dagger">Кинжал</string>
     <string name="curl">Локон</string>
     <string name="suspension">Подвеска</string>
-    <string name="ring">Инфа о кольце</string>
+    <string name="ring">Информация о кольце</string>
 
     <string-array name="names">
         <item>@string/empty</item>
