@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -117,9 +118,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!create[0]) {
                     if (!menuClicked) {
-                        nextStack.clear();
-                        previousStack.push(currentTaskState);
-                        currentTaskState = getTaskState();
+                        List<TaskItem> taskState = getTaskState();
+                        if (!checkDuplicates(taskState)) {
+                            nextStack.clear();
+                            previousStack.push(currentTaskState);
+                            currentTaskState = taskState;
+                        } else {
+                            menuClicked = true;
+                            setTaskState(currentTaskState);
+                            showDuplicatesDialog();
+                        }
                     } else {
                         menuClicked = false;
                     }
@@ -175,6 +183,42 @@ public class MainActivity extends AppCompatActivity {
 
     private int getArrayPosition(int arrayRes, String item) {
         return Arrays.asList(getResources().getStringArray(arrayRes)).indexOf(item);
+    }
+
+    private boolean checkDuplicates(List<TaskItem> taskItems) {
+        for (TaskItem taskItem : taskItems) {
+            String taskName = taskItem.getName();
+            String taskColor = taskItem.getColor();
+            String taskAlcohol = taskItem.getAlcohol();
+            String taskSmoke = taskItem.getSmoke();
+            String taskThing = taskItem.getThing();
+            for (TaskItem item : taskItems) {
+                if (!taskItem.equals(item)) {
+                    String name = item.getName();
+                    String color = item.getColor();
+                    String alcohol = item.getAlcohol();
+                    String smoke = item.getSmoke();
+                    String thing = item.getThing();
+                    if ((!TextUtils.isEmpty(taskName) && !TextUtils.isEmpty(name) && taskName.equals(name)) ||
+                            (!TextUtils.isEmpty(taskColor) && !TextUtils.isEmpty(color) && taskColor.equals(color)) ||
+                            (!TextUtils.isEmpty(taskAlcohol) && !TextUtils.isEmpty(alcohol) && taskAlcohol.equals(alcohol)) ||
+                            (!TextUtils.isEmpty(taskSmoke) && !TextUtils.isEmpty(smoke) && taskSmoke.equals(smoke)) ||
+                            (!TextUtils.isEmpty(taskThing) && !TextUtils.isEmpty(thing) && taskThing.equals(thing))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private void showDuplicatesDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.duplicate_title)
+                .setMessage(R.string.duplicate_message)
+                .setPositiveButton(R.string.fine, null)
+                .show();
     }
 
     private void checkWin() {
