@@ -1,5 +1,8 @@
 package by.jetfire.lotreinstein.ui.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -9,11 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.plattysoft.leonids.ParticleSystem;
+import com.plattysoft.leonids.modifiers.ScaleModifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +29,7 @@ import java.util.Stack;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import by.jetfire.lotreinstein.R;
 import by.jetfire.lotreinstein.entity.TaskItem;
 import by.jetfire.lotreinstein.utils.Utils;
@@ -30,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.main_container)
     protected LinearLayout container;
+    @BindView(R.id.main_win)
+    protected TextView win;
 
     private List<TaskItem> taskItems;
     private Stack<List<TaskItem>> previousStack;
@@ -37,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private List<TaskItem> currentTaskState;
 
     private boolean menuClicked;
+
+    private ParticleSystem particleSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         menuClicked = false;
                     }
+
+                    checkWin();
                 } else {
                     create[0] = false;
                 }
@@ -163,6 +177,56 @@ public class MainActivity extends AppCompatActivity {
         return Arrays.asList(getResources().getStringArray(arrayRes)).indexOf(item);
     }
 
+    private void checkWin() {
+        if (taskItems.equals(currentTaskState)) {
+            container.setEnabled(false);
+
+            ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
+            animator.setDuration(1000);
+            animator.setInterpolator(new OvershootInterpolator());
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+
+                    win.setScaleX(value);
+                    win.setScaleY(value);
+
+                    win.setRotation(360 * value);
+                }
+            });
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    win.setVisibility(View.VISIBLE);
+
+                    particleSystem = new ParticleSystem(MainActivity.this, 90, R.drawable.star, 1000, R.id.main_root);
+                    particleSystem.setSpeedByComponentsRange(-0.1f, 0.1f, -0.1f, 0.02f)
+                            .setAcceleration(0.000003f, 90)
+                            .setInitialRotationRange(0, 360)
+                            .setRotationSpeed(120)
+                            .setFadeOut(1000)
+                            .addModifier(new ScaleModifier(0f, 1.5f, 0, 1500))
+                            .emit(container, 100);
+                }
+            });
+            animator.start();
+        }
+    }
+
+    private void hideWin() {
+        container.setEnabled(true);
+        win.setVisibility(View.GONE);
+        if (particleSystem != null) {
+            particleSystem.cancel();
+        }
+    }
+
+    @OnClick(R.id.main_win)
+    protected void onWinClick() {
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -192,6 +256,8 @@ public class MainActivity extends AppCompatActivity {
     private void undo() {
         if (previousStack.size() > 0) {
             menuClicked = true;
+
+            hideWin();
 
             nextStack.push(currentTaskState);
             currentTaskState = previousStack.pop();
@@ -240,6 +306,8 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        hideWin();
+
                         previousStack.clear();
                         nextStack.clear();
                         clearTable();

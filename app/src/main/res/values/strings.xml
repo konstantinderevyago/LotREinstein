@@ -115,4 +115,5 @@
     <string name="restart_message">Начать заново?</string>
     <string name="ok">Да</string>
     <string name="cancel">Отмена</string>
+    <string name="win">Победа!</string>
 </resources>
