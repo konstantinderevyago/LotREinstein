@@ -32,7 +32,7 @@
     <string name="five">5</string>
 
     <string name="name">Имя</string>
-    <string name="gendalf">Гендальф</string>
+    <string name="gendalf">Гэндальф</string>
     <string name="aragorn">Арагорн</string>
     <string name="legolas">Леголас</string>
     <string name="gimly">Гимли</string>
@@ -52,8 +52,8 @@
     <string name="ale">Эль</string>
     <string name="cognac">Коньяк</string>
 
-    <string name="smoke">Табак</string>
-    <string name="no">Нет</string>
+    <string name="smoke">Курево</string>
+    <string name="no">Не курит</string>
     <string name="latania">Латания</string>
     <string name="peric">Перик</string>
     <string name="maryland">Мэриленд</string>
