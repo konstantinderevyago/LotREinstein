@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Spinner style="@style/TaskItem" />
+<Spinner xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TaskItem"
+    android:popupBackground="@color/black_alpha_40" />

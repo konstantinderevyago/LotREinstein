@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     private void buildSpinner(ViewGroup view, int arrayRes) {
         Spinner spinner = (Spinner) LayoutInflater.from(this).inflate(R.layout.spinner_item, view, false);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_text_item, getResources().getStringArray(arrayRes));
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
 
         final boolean[] create = {true};
