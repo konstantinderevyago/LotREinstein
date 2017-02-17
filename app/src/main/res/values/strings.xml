@@ -114,7 +114,7 @@
     <string name="restart_message">Начать заново?</string>
     <string name="ok">Да</string>
     <string name="cancel">Отмена</string>
-    <string name="win">Победа!</string>
+    <string name="win">Победа!\nОткрывай зелёный мешок!</string>
     <string name="duplicate_title">Соррян</string>
     <string name="duplicate_message">Такой вариант уже выбран</string>
     <string name="fine">Ну ладно</string>

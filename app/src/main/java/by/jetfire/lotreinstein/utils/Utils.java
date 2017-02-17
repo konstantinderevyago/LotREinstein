@@ -1,6 +1,7 @@
 package by.jetfire.lotreinstein.utils;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ import by.jetfire.lotreinstein.entity.TaskItem;
  */
 
 public class Utils {
+
+    private static MediaPlayer mediaPlayer;
 
     public static List<TaskItem> getTaskItems(Context context) {
         List<TaskItem> taskItems = new ArrayList<>();
@@ -34,6 +37,19 @@ public class Utils {
                 context.getString(R.string.maryland), context.getString(R.string.book)));
 
         return taskItems;
+    }
+
+    public static void playMusic(Context context, int mediaRes) {
+        try {
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer = MediaPlayer.create(context, mediaRes);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

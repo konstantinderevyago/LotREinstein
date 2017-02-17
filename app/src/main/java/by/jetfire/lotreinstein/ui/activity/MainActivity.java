@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.main_container)
     protected LinearLayout container;
+    @BindView(R.id.main_bg)
+    protected ImageView background;
     @BindView(R.id.main_win)
     protected TextView win;
 
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Utils.playMusic(this, R.raw.theme);
 
         taskItems = Utils.getTaskItems(this);
         nextStack = new Stack<>();
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void buildSpinner(ViewGroup view, int arrayRes) {
         Spinner spinner = (Spinner) LayoutInflater.from(this).inflate(R.layout.spinner_item, view, false);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(arrayRes));
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_text_item, getResources().getStringArray(arrayRes));
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
 
@@ -224,6 +229,8 @@ public class MainActivity extends AppCompatActivity {
     private void checkWin() {
         if (taskItems.equals(currentTaskState)) {
             container.setEnabled(false);
+            background.setImageResource(R.drawable.lotr_win_bg);
+            Utils.playMusic(this, R.raw.shire);
 
             ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
             animator.setDuration(1000);
@@ -260,6 +267,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideWin() {
         container.setEnabled(true);
+        background.setImageResource(R.drawable.lotr_bg);
+        Utils.playMusic(this, R.raw.theme);
         win.setVisibility(View.GONE);
         if (particleSystem != null) {
             particleSystem.cancel();

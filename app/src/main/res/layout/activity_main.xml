@@ -5,10 +5,18 @@
     android:layout_height="match_parent"
     tools:context="by.jetfire.lotreinstein.ui.activity.MainActivity">
 
+    <ImageView
+        android:id="@+id/main_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lotr_bg" />
+
     <FrameLayout
         android:id="@+id/main_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black_alpha_40">
 
         <LinearLayout
             android:id="@+id/main_container"
@@ -27,8 +35,12 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/win"
-        android:textColor="@color/colorPrimary"
+        android:shadowColor="@color/black_alpha_40"
         android:textSize="34sp"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:textColor="@color/green"
         android:visibility="gone" />
 
 </FrameLayout>
